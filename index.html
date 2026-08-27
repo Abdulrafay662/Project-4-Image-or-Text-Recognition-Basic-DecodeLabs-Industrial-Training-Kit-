@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DecodeLabs | AI Vision Pipeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col items-center justify-center p-6">
+
+    <div class="max-w-xl w-full bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl p-8">
+        <div class="border-b border-slate-700 pb-4 mb-6">
+            <span class="text-xs uppercase tracking-widest text-emerald-400 font-semibold">Industrial Training Kit | Batch 2026</span>
+            <h1 class="text-2xl font-bold mt-1">Project 4: Vision Pipeline</h1>
+        </div>
+
+        <p class="text-slate-300 text-sm mb-6">
+            Execute the Python computer vision processing script via the backend interface below to generate and render visual artifacts.
+        </p>
+
+        <button onclick="triggerPipeline()" id="runBtn" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 px-4 rounded-xl transition duration-200 shadow-lg shadow-emerald-900/40">
+            Execute Processing Pipeline
+        </button>
+
+        <div id="resultContainer" class="mt-8 hidden text-center">
+            <h2 class="text-sm font-semibold text-slate-400 mb-3 uppercase tracking-wider">Processed Output Artifact</h2>
+            <div class="border-2 border-dashed border-slate-600 rounded-xl p-4 bg-slate-900/50 inline-block">
+                <img id="outputImage" src="" alt="Final Output" class="rounded-lg shadow-md max-w-full h-auto">
+            </div>
+            <p id="successText" class="text-emerald-400 text-xs mt-3 font-mono"></p>
+        </div>
+    </div>
+
+    <script>
+        async function triggerPipeline() {
+            const btn = document.getElementById("runBtn");
+            btn.innerText = "Processing Matrix...";
+            btn.disabled = true;
+
+            try {
+                let response = await fetch('/generate', { method: 'POST' });
+                let data = await response.json();
+
+                if(data.status === "success") {
+                    const imgElement = document.getElementById("outputImage");
+                    imgElement.src = data.image_url + "?" + new Date().getTime();
+                    
+                    document.getElementById("resultContainer").classList.remove("hidden");
+                    document.getElementById("successText").innerText = "SUCCESS: Artifact generated and rendered.";
+                }
+            } catch (error) {
+                console.error("Error executing pipeline:", error);
+            } finally {
+                btn.innerText = "Execute Processing Pipeline";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
