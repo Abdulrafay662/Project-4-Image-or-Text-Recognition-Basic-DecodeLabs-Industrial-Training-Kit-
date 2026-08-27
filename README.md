@@ -8,7 +8,7 @@ This repository hosts the implementation for **Project 4 (Optional Mastery Phase
 
 ## 🛠️ Tech Stack & Dependencies
 * **Python 3.x** — Core algorithmic logic
-* **OpenCV (`cv2`)** — Computer vision, color matrix transformation, and image rendering[cite: 1]
+* **OpenCV (`opencv-python-headless`)** — Computer vision, color matrix transformation, and image rendering[cite: 1]
 * **Flask** — Lightweight backend server for web integration
 * **Tailwind CSS** — Modern interface styling framework
 
@@ -16,11 +16,12 @@ This repository hosts the implementation for **Project 4 (Optional Mastery Phase
 
 ## 📂 Repository Architecture
 ```text
-DecodeLabs-AI-Project4-Vision/
+Project-4-Image-or-Text-Recognition-Basic-DecodeLabs-Industrial-Training-Kit/
 │
 ├── static/                   <-- Auto-saves generated visual artifacts
 │   └── final_output.jpg
 ├── templates/                <-- Holds front-end interface views
 │   └── index.html
 ├── app.py                    <-- Flask backend server and OpenCV script
+├── requirements.txt          <-- Cloud dependency specification
 └── README.md                 <-- Project documentation
